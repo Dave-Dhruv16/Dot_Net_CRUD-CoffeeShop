@@ -1,0 +1,65 @@
+﻿@model DataTable
+@using System.Data
+
+<main id="main" class="main">
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">OrderDetails</h5>
+                        <a asp-controller="OrderDetail" asp-action="AddOrderDetailForm">
+                            <button type="submit" class="btn btn-primary mb-3">Add OrderDetail</button>
+                        </a>
+                        <!-- Table with stripped rows -->
+                        <div style="overflow-x: auto;">
+                            @if (Model == null)
+                            {
+                                <p>No data available</p>
+                            }
+                            else
+                            {
+                                <table class="table datatable">
+                                    <thead>
+                                        <tr>
+                                            <th>OrderDetailID</th>
+                                            <th>OrderID</th>
+                                            <th>ProductID</th>
+                                            <th>Quantity</th>
+                                            <th>Amount</th>
+                                            <th>TotalAmount</th>
+                                            <th>UserID</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (DataRow row in Model.Rows)
+                                        {
+                                            <tr>
+
+                                                <td>@row["OrderDetailID"]</td>
+                                                <td>@row["OrderID"]</td>
+                                                <td>@row["ProductID"]</td>
+                                                <td>@row["Quantity"]</td>
+                                                <td>@row["Amount"]</td>
+                                                <td>@row["TotalAmount"]</td>
+                                                <td>@row["UserID"]</td>
+                                                <td class="d-flex justify-content-start">
+                                                    <button type="button" class="btn btn-warning me-2">✎</button>
+                                                    <a asp-controller="OrderDetail" asp-action="OrderDetailDelete" asp-route-OrderDetailID="@row["OrderDetailID"]">
+                                                        <button class="btn btn-danger">🗑</button>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            }
+                        </div>
+                        <!-- End Table with stripped rows -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main><!-- End #main -->
