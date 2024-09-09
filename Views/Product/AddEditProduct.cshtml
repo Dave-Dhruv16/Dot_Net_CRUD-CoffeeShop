@@ -1,0 +1,38 @@
+﻿@model Nice_admin_form___table.Models.ProductModel
+
+<h2>@(Model.ProductID > 0 ? "Edit Product" : "Add New Product")</h2>
+
+<form asp-action="SaveProduct">
+    <input type="hidden" asp-for="ProductID" />
+
+    <div class="form-group">
+        <label asp-for="ProductName" class="control-label"></label>
+        <input asp-for="ProductName" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ProductPrice" class="control-label"></label>
+        <input asp-for="ProductPrice" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ProductCode" class="control-label"></label>
+        <input asp-for="ProductCode" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Description" class="control-label"></label>
+        <textarea asp-for="Description" class="form-control"></textarea>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="UserID" class="control-label">User</label>
+        <select asp-for="UserID" class="form-control" asp-items="@(new SelectList(ViewBag.Users, "UserID", "UserName"))">
+            <option value="">-- Select User --</option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">
+        @(Model.ProductID > 0 ? "Update" : "Add")
+    </button>
+</form>

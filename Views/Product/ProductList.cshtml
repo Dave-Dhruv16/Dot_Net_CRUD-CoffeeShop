@@ -1,20 +1,16 @@
-﻿@model DataTable
-@using System.Data
-
+﻿@model List<Nice_admin_form___table.Models.ProductModel>
 
 <main id="main" class="main">
-
     <section class="section">
         <div class="row">
             <div class="col-lg-12">
-
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Products</h5>
-                        <a asp-controller="Product" asp-action="AddProductForm">
-                            <button type="submit" class="btn btn-primary mb-3">Add Product</button>
+                        <a asp-controller="Product" asp-action="AddEditProductForm">
+                            <button type="button" class="btn btn-primary mb-3">Add Product</button>
                         </a>
-                        <!-- Table with stripped rows -->
+
                         <div style="overflow-x: auto;">
                             <table class="table datatable">
                                 <thead>
@@ -26,40 +22,35 @@
                                         <th>Description</th>
                                         <th>UserID</th>
                                         <th>Action</th>
-
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach (DataRow row in Model.Rows)
+                                    @foreach (var item in Model)
                                     {
-                                        
                                         <tr>
-                                            <td>@row["ProductID"]</td>
-                                            <td>@row["ProductName"]</td>
-                                            <td>@row["ProductPrice"]</td>
-                                            <td>@row["ProductCode"]</td>
-                                            <td>@row["Description"]</td>
-                                            <td>@row["UserID"]</td>
-                                    
+                                            <td>@item.ProductID</td>
+                                            <td>@item.ProductName</td>
+                                            <td>@item.ProductPrice</td>
+                                            <td>@item.ProductCode</td>
+                                            <td>@item.Description</td>
+                                            <td>@item.UserID</td>
                                             <td class="d-flex justify-content-start">
-                                                <button type="button" class="btn btn-warning me-2">✎</button>                                                
-                                                <a asp-controller="Product" asp-action="ProductDelete" asp-route-ProductID="@row["ProductID"]">
+                                                <a asp-action="AddEditProductForm" asp-route-ProductID="@item.ProductID">
+                                                    <button type="button" class="btn btn-warning me-2">✎</button>
+                                                </a>
+
+                                                <a asp-controller="Product" asp-action="ProductDelete" asp-route-ProductID="@item.ProductID">
                                                     <button class="btn btn-danger">🗑</button>
                                                 </a>
                                             </td>
                                         </tr>
                                     }
-
                                 </tbody>
                             </table>
-
-                            <!-- End Table with stripped rows -->
-
                         </div>
                     </div>
-
                 </div>
             </div>
+        </div>
     </section>
-
-</main><!-- End #main -->
+</main>
